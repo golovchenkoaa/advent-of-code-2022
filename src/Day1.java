@@ -1,6 +1,9 @@
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class Day1 {
 
@@ -22,17 +25,18 @@ public class Day1 {
                 
                 10000
                 """.split("\n", -1));
-        long elfSum = 0, max = 0;
+        long elfSum = 0;
+        List<Long> totals = new ArrayList<>(100);
         for (String line : lines) {    
             if (line.isBlank()) {
-//                System.out.println(elfSum);
-                max = Math.max(max, elfSum);
+                totals.add(elfSum);
                 elfSum = 0;
             } else {
                 elfSum += Integer.parseUnsignedInt(line);
             }
         }
-        max = Math.max(max, elfSum);
-        System.out.println("Max: " + max);
+        totals.sort(Comparator.<Long>naturalOrder().reversed());
+        System.out.println("Max1: " + totals.get(0));
+        System.out.println("Max3: " + (totals.get(0) + totals.get(1) + totals.get(2)));
     }
 }
