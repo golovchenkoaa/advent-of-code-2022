@@ -1,3 +1,4 @@
+package aoc2022;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
