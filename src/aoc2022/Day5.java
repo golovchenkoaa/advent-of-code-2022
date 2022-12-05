@@ -25,21 +25,13 @@ public class Day5 {
                     target.push(source.pop());     
                 }
             } else {          
-                int start = source.size() - count;
-                for (int i = count; i > 0; i--) {
-                    target.push(source.get(start++));
-                }
-                for (int i = count; i > 0; i--) {
-                    source.pop();
-                }
+                var moved = source.subList(source.size() - count, source.size());
+                target.addAll(moved);
+                moved.clear();
             }
 //            System.out.println("After " + count + ' ' + from + ' ' + to + ' ' + Arrays.toString(stacks));
         }
 
-        public Stack<String>[] getStacks() {
-            return stacks;
-        }   
-        
         public String getTopCrates() {
             StringBuilder sb = new StringBuilder();
             for (Stack<String> s : stacks) {
@@ -77,8 +69,8 @@ public class Day5 {
              }        
         }
         it = lines.listIterator(commandsIndex);
-        CargoCrane crane1 = buildCrate(lines, headerEndIndex, 1);
-        CargoCrane craneUnlim = buildCrate(crane1.getStacks(), 0);
+        CargoCrane crane1 = buildCrane(lines, headerEndIndex, 1);
+        CargoCrane craneUnlim = buildCrane(lines, headerEndIndex, 0);
         while (it.hasNext()) {
             int[] commands = parseCommands(it.next());
             crane1.move(commands[0], commands[1], commands[2]);
@@ -96,15 +88,7 @@ public class Day5 {
             .toArray();
     }
     
-    private static CargoCrane buildCrate(Stack<String>[] stacksToClone, int maxAtOnce) {
-        Stack<String>[] stacks = new Stack[stacksToClone.length];
-        for (int i = 0; i < stacksToClone.length; i++) {
-            stacks[i] = (Stack<String>) stacksToClone[i].clone();
-        }
-        return new CargoCrane(stacks, maxAtOnce); 
-    }
-    
-    private static CargoCrane buildCrate(List<String> lines, int headerEndIndex, int maxAtOnce) {
+    private static CargoCrane buildCrane(List<String> lines, int headerEndIndex, int maxAtOnce) {
         ListIterator<String> it = lines.listIterator(headerEndIndex);
         String numbers = it.previous(); 
         int stackCout = Integer.parseUnsignedInt(numbers.substring(numbers.lastIndexOf("   ")).trim());
