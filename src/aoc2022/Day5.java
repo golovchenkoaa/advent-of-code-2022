@@ -20,11 +20,11 @@ public class Day5 {
         public void move(int count, int from, int to) {
             var source = stacks[from - 1];
             var target = stacks[to - 1];
-            if (maxAtOnce > 0) {
+            if (maxAtOnce == 1) {
                 while (count-- > 0) {
                     target.push(source.pop());     
                 }
-            } else {          
+            } else { // unlim        
                 var moved = source.subList(source.size() - count, source.size());
                 target.addAll(moved);
                 moved.clear();
