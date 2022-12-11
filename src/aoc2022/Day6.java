@@ -1,23 +1,14 @@
 package aoc2022;
 import java.io.IOException;
-import java.io.StringReader;
-import java.nio.CharBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.Stack;
 
 public class Day6 {
     
     public static void main(String[] args) throws Exception {        
-//        var lines = Collections.singletonList(Files.readString(Path.of("input/day6.txt")));
+//        var lines = List.of(Files.readString(Path.of("input/day6.txt")));
         var lines = Arrays.asList(
                 """            
                 bvwbjplbgvbhsrlpgdmjqwftvncz
